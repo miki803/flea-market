@@ -1,0 +1,103 @@
+body {
+    background-color: #222;
+    font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+}
+
+.item-detail {
+    display: flex;
+    max-width: 1100px;
+    background-color: #fff;
+    margin: 60px auto;
+    padding: 40px 60px;
+    border-radius: 10px;
+    gap: 40px;
+}
+
+/* 左側 */
+.item-detail__left img,
+.item-placeholder {
+    width: 400px;
+    height: 400px;
+    background-color: #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 右側 */
+.item-detail__right {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.item-price {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.btn-purchase {
+    display: inline-block;
+    background-color: #ff6b6b;
+    color: #fff;
+    text-align: center;
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 20px 0;
+}
+
+.item-section {
+    margin-top: 30px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 3px 10px;
+    font-size: 13px;
+    margin-right: 6px;
+}
+
+.comments-section {
+    margin-top: 40px;
+}
+
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+.btn-comment {
+    background-color: #ff6b6b;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-comment:hover {
+    background-color: #e85757;
+}
+
+.login-prompt {
+    color: #666;
+    font-size: 14px;
+}

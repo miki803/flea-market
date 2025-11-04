@@ -1,0 +1,95 @@
+body {
+    background-color: #222;
+    font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+}
+
+.sell-container {
+    background-color: #fff;
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 50px 80px;
+    border-radius: 10px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.upload-btn {
+    display: inline-block;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tag.selected {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    background-color: #ff6b6b;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #e85757;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 3px;
+}

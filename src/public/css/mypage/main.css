@@ -1,0 +1,107 @@
+body {
+    background-color: #222;
+    font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+}
+
+.mypage-container {
+    background-color: #fff;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 40px 60px;
+    border-radius: 10px;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-image .placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-edit {
+    display: inline-block;
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-edit:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+.tab-menu {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 25px;
+}
+
+.tab-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.tab-menu a.active {
+    color: #e60000;
+    border-bottom: 2px solid #e60000;
+}
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.item-card {
+    width: 180px;
+    text-align: center;
+}
+
+.item-image {
+    width: 180px;
+    height: 180px;
+    background-color: #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+.item-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.no-items {
+    color: #777;
+    margin-top: 40px;
+    text-align: center;
+}
