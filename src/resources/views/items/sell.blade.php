@@ -16,7 +16,11 @@
         <label class="form-label">商品画像</label>
         <input type="file" name="image" id="image" hidden>
         <label class="upload-btn" for="image" >画像を選択する</label>
-        <p class="error">@error('image'){{ $message }}@enderror</p>
+        <p class="error">
+            @error('image')
+            {{ $message }}
+            @enderror
+        </p>
     </div>
 
     <hr>
@@ -35,7 +39,11 @@
             </label>
             @endforeach
         </div>
-        <p class="error">@error('categories'){{ $message }}@enderror</p>
+        <p class="error">
+            @error('categories')
+            {{ $message }}
+            @enderror
+        </p>
     </div>
 
     {{-- 商品の状態 --}}
@@ -47,7 +55,11 @@
                 <option value="{{ $condition }}">{{ $condition }}</option>
             @endforeach
         </select>
-        <p class="error">@error('condition'){{ $message }}@enderror</p>
+        <p class="error">
+            @error('condition')
+            {{ $message }}
+            @enderror
+        </p>
     </div>
 
     <hr>
@@ -58,25 +70,41 @@
         <div class="form-group">
             <label class="form-label" for="name" >商品名</label>
             <input type="text" name="name" id="name" placeholder="商品名を入力してください" value="{{ old('name') }}">
-            <p class="error">@error('name'){{ $message }}@enderror</p>
+            <p class="error">
+                @error('name')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
         <div class="form-group">
             <label class="form-label" for="brand" >ブランド名</label>
             <input type="text" name="brand" id="brand" placeholder="ブランド名を入力してください" value="{{ old('brand') }}">
-            <p class="error">@error('brand'){{ $message }}@enderror</p>
+            <p class="error">
+                @error('brand')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
         <div class="form-group">
             <label class="form-label" for="description" >商品の説明</label>
             <textarea name="description" id="description" rows="4" placeholder="商品の説明を入力してください">{{ old('description') }}</textarea>
-            <p class="error">@error('description'){{ $message }}@enderror</p>
+            <p class="error">
+                @error('description')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
         <div class="form-group">
             <label class="form-label" for="price" >販売価格</label>
             <input type="number" name="price" id="price" placeholder="¥" value="{{ old('price') }}">
-            <p class="error">@error('price'){{ $message }}@enderror</p>
+            <p class="error">
+                @error('price')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
         <button class="btn-submit" type="submit" >出品する</button>
@@ -87,7 +115,7 @@
 <script>
   // タグ選択をクリックで切り替え（見た目変更）
   document.querySelectorAll('.category-checkbox').forEach((checkbox) => {
-    checkbox.addEventListener('change', function() {
+    checkboxcheckbox.addEventListener('change', function() {
       if (this.checked) {
         this.parentElement.classList.add('selected');
       } else {

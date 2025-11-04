@@ -10,13 +10,13 @@
   {{-- タブ切り替え --}}
   @auth
     <div class="tab-menu">
-      <a href="{{ route('items.index') }}" class="{{ request('tab') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
-      <a href="{{ route('items.index', ['tab' => 'mylist']) }}" class="{{ request('tab') === 'mylist' ? 'active' : '' }}">マイリスト</a>
+        <a href="{{ route('items.index') }}" class="{{ request('tab') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
+        <a href="{{ route('items.index', ['tab' => 'mylist']) }}" class="{{ request('tab') === 'mylist' ? 'active' : '' }}">マイリスト</a>
     </div>
   @else
     <div class="tab-menu">
-      <a href="{{ route('items.index') }}" class="active">おすすめ</a>
-      <span class="tab-disabled">マイリスト（ログインが必要）</span>
+        <a href="{{ route('items.index') }}" class="active">おすすめ</a>
+        <span class="tab-disabled">マイリスト（ログインが必要）</span>
     </div>
   @endauth
 

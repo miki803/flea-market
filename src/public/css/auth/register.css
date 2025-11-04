@@ -19,17 +19,17 @@ body {
     margin-bottom: 30px;
 }
 
-.form-group {
+.register-group {
     margin-bottom: 20px;
 }
 
-label {
+.register-label {
     display: block;
     font-weight: bold;
     margin-bottom: 6px;
 }
 
-input {
+.register-input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;

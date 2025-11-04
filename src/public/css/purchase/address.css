@@ -23,13 +23,13 @@ body {
     margin-bottom: 25px;
 }
 
-label {
+.address-label {
     display: block;
     font-weight: bold;
     margin-bottom: 6px;
 }
 
-input[type="text"] {
+.address-input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

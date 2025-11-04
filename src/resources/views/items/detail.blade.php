@@ -22,17 +22,14 @@
     <p class="item-brand">{{ $item->brand }}</p>
     <p class="item-price">¥{{ number_format($item->price) }} <span>（税込）</span></p>
 
-    {{-- お気に入り数やコメント数（任意） --}}
+    {{-- お気に入り数やコメント数 --}}
     <div class="item-actions">
       <span>⭐ {{ $item->likes_count ?? 0 }}</span>
       <span>💬 {{ $item->comments->count() }}</span>
     </div>
 
     @auth
-      <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="btn-purchase">購入手続きへ</a>
-    @else
-      <a href="{{ route('login.show') }}" class="btn-purchase">ログインして購入</a>
-    @endauth
+      <a class="btn-purchase" href="{{ route('purchase.show', ['item_id' => $item->id]) }}" >購入手続きへ</a>
 
     <div class="item-section">
       <h3>商品説明</h3>

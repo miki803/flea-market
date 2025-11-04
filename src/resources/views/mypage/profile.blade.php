@@ -21,17 +21,21 @@
             </div>
             <label class="btn-upload" for="profile_image">画像を選択する</label>
             <input type="file" id="profile_image" name="profile_image" hidden>
-            @error('profile_image')
-                <p class="error">{{ $message }}</p>
-            @enderror
+            <p class="error">
+                @error('profile_image')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
         <div class="form-group">
             <label for="name">ユーザー名</label>
             <input type="text" name="name" value="{{ old('name', $user->name) }}">
-            @error('name')
-                <p class="error">{{ $message }}</p>
-            @enderror
+            <p class="error">
+                @error('name')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
         <div class="form-group">

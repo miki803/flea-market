@@ -12,39 +12,47 @@
     <form class="register-form" action="{{ route('register.store') }}" method="POST">
         @csrf
 
-        <div class="form-group">
-            <label for="name">ユーザー名</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}">
-            @error('name')
-                <p class="error">{{ $message }}</p>
-            @enderror
+        <div class="register-group">
+            <label class="register-label" for="name">ユーザー名</label>
+            <input class="register-input" class="register-input" type="text" id="name" name="name" value="{{ old('name') }}">
+            <p class="error">
+                @error('name')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
-        <div class="form-group">
-            <label for="email">メールアドレス</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}">
-            @error('email')
-                <p class="error">{{ $message }}</p>
-            @enderror
+        <div class="register-group">
+            <label class="register-label" for="email">メールアドレス</label>
+            <input class="register-input" class="register-input" type="email" id="email" name="email" value="{{ old('email') }}">
+            <p class="error">
+                @error('email')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
-        <div class="form-group">
-            <label for="password">パスワード</label>
-            <input type="password" id="password" name="password">
-            @error('password')
-                <p class="error">{{ $message }}</p>
-            @enderror
+        <div class="register-group">
+            <label class="register-label" for="password">パスワード</label>
+            <input class="register-input" type="password" id="password" name="password">
+            <p class="error">
+                @error('password')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
-        <div class="form-group">
-            <label for="password_confirmation">確認用パスワード</label>
-            <input type="password" id="password_confirmation" name="password_confirmation">
-            @error('password')
-                <p class="error">{{ $message }}</p>
-            @enderror
+        <div class="register-group">
+            <label class="register-label" for="password_confirmation">確認用パスワード</label>
+            <input class="register-input" type="password" id="password_confirmation" name="password_confirmation">
+            <p class="error">
+                @error('password')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
 
-        <button type="submit" class="btn-submit">登録する</button>
+        <button class="btn-submit" type="submit" >登録する</button>
 
         <p class="login-link">
             <a href="{{ route('login.show') }}">ログインはこちら</a>

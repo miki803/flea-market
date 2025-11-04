@@ -31,11 +31,11 @@
                     </form>
 
                     <a href="{{ route('mypage.index') }}">マイページ</a>
-                    <a href="{{ route('item.create') }}" class="header__sell-btn">出品</a>
+                    <a class="header__sell-btn" href="{{ route('item.create') }}" >出品</a>
                 @else
                     <a href="{{ route('login.show') }}">ログイン</a>
                     <a href="{{ route('register.show') }}">会員登録</a>
-                    <a href="{{ route('login.show') }}" class="header__sell-btn">出品</a>
+                    <a class="header__sell-btn" href="{{ route('login.show') }}" >出品</a>
                 @endauth
             </nav>
         </div>
