@@ -111,17 +111,4 @@
     </form>
 </div>
 
-{{-- JS --}}
-<script>
-  // タグ選択をクリックで切り替え（見た目変更）
-  document.querySelectorAll('.category-checkbox').forEach((checkbox) => {
-    checkboxcheckbox.addEventListener('change', function() {
-      if (this.checked) {
-        this.parentElement.classList.add('selected');
-      } else {
-        this.parentElement.classList.remove('selected');
-      }
-    });
-  });
-</script>
 @endsection

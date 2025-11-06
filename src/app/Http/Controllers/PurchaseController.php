@@ -6,11 +6,34 @@ use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
-    public function showForm()
+    // 購入フォーム表示
+    public function showForm($item_id)
     {
-
-        return view('purchase.buy');
+        $item = Product::findOrFail($item_id);
+        $user = Auth::user();
+        return view('purchase.buy', compact('item', 'user'));
     }
 
-   
+    // 購入処理
+    public function store(Request $request, $item_id)
+    {
+        $request->validate([
+            'payment_method' => ['required', 'string'],
+        ]);
+        $item = Product::findOrFail($item_id);
+
+        Purchase::create([
+            'user_id' => Auth::id(),
+            'product_id' => $item->id,
+            'payment_method' => $request->payment_method,
+            'postal_code' => Auth::user()->postal_code,
+            'address' => Auth::user()->address,
+            'building' => Auth::user()->building,
+        ]);
+        return redirect()->route('mypage.index')->with('success', '購入が完了しました！');
+    }
+
+
+
+
 }

@@ -15,5 +15,33 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-   
+   public function login(Request $request)
+    {
+        // バリデーション
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+    // 認証試行
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate(); // セッション再生成
+            return redirect()->intended('/'); // トップページなどへ
+        }
+
+        // 認証失敗時
+        return back()->withErrors([
+            'email' => 'メールアドレスまたはパスワードが違います。',
+        ])->onlyInput('email');
+    }
+
+    // ログアウト処理（必要なら）
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
 }
