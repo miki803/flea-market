@@ -66,7 +66,7 @@
             <button class="btn-comment" type="submit" >コメントを送信する</button>
         </form>
         @else
-            <p class="login-prompt">コメントを投稿するには <a href="{{ route('login.show') }}">ログイン</a> が必要です。</p>
+            <p class="login-prompt">コメントを投稿するには <a href="{{ route('login') }}">ログイン</a> が必要です。</p>
         @endauth
     </div>
 

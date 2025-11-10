@@ -9,12 +9,12 @@
 
     <h2 class="register-title">会員登録</h2>
 
-    <form class="register-form" action="{{ route('register.store') }}" method="POST">
+    <form class="register-form" action="{{ url('/register') }}" method="POST">
         @csrf
 
         <div class="register-group">
             <label class="register-label" for="name">ユーザー名</label>
-            <input class="register-input" class="register-input" type="text" id="name" name="name" value="{{ old('name') }}">
+            <input class="register-input"  type="text" id="name" name="name" value="{{ old('name') }}">
             <p class="error">
                 @error('name')
                 {{ $message }}
@@ -24,7 +24,7 @@
 
         <div class="register-group">
             <label class="register-label" for="email">メールアドレス</label>
-            <input class="register-input" class="register-input" type="email" id="email" name="email" value="{{ old('email') }}">
+            <input class="register-input" type="email" id="email" name="email" value="{{ old('email') }}">
             <p class="error">
                 @error('email')
                 {{ $message }}
@@ -55,7 +55,7 @@
         <button class="btn-submit" type="submit" >登録する</button>
 
         <p class="login-link">
-            <a href="{{ route('login.show') }}">ログインはこちら</a>
+            <a href="{{ route('login') }}">ログインはこちら</a>
         </p>
     </form>
 </div>

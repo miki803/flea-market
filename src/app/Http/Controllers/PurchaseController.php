@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PurchaseRequest;
+use App\Models\Product;
+use App\Models\Purchase;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
@@ -17,9 +20,6 @@ class PurchaseController extends Controller
     // 購入処理
     public function store(Request $request, $item_id)
     {
-        $request->validate([
-            'payment_method' => ['required', 'string'],
-        ]);
         $item = Product::findOrFail($item_id);
 
         Purchase::create([

@@ -2,36 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
     // 商品一覧表示
     public function index(Request $request)
     {
-        $tab = $request->get('tab', 'recommend');
+        $tab = $request->get('tab');
         if ($tab === 'mylist' && Auth::check()) {
-            $items = Auth::user()->favorites()->get();
+            $items = Auth::user()->favorites;
         } else {
             $items = Product::latest()->get();
         }
     }
+
     // 商品詳細
     public function show($item_id)
     {
-        $item = Product::findOrFail($item_id);
+        $item = Product::with(['comments.user'])->findOrFail($item_id);
         return view('items.detail', compact('item'));
     }
 
     // 出品フォーム
     public function create()
     {
-        $categories = \App\Models\Category::all();
-        $conditions = ['新品', '未使用に近い', 'やや傷や汚れあり'];
+        $categories = [
+        'ファッション',
+        '家電',
+        '雑貨',
+        '食品',
+        ];
+        $conditions = ['新品', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'];
+
+
         return view('items.sell', compact('categories', 'conditions'));
     }
 
-    // 出品処理
+    // 出品登録
     public function store(Request $request)
     {
         $request->validate([
@@ -51,11 +61,11 @@ class ItemController extends Controller
 
         Product::create([
             'user_id' => Auth::id(),
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'condition' => $request->condition,
-            'category' => $request->category,
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'condition' => $validated['condition'],
+            'category' => $request->input('category', 'その他'),
             'image' => $path,
         ]);
         return redirect()->route('items.index')->with('success', '商品を出品しました！');

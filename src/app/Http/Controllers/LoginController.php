@@ -7,15 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-     /**
-     * ログイン画面表示
-     */
+
+    //ログイン画面表示
     public function showLogin()
     {
         return view('auth.login');
     }
 
-   public function login(Request $request)
+    public function login(Request $request)
     {
         // バリデーション
         $credentials = $request->validate([
@@ -34,14 +33,14 @@ class LoginController extends Controller
         ])->onlyInput('email');
     }
 
-    // ログアウト処理（必要なら）
+    // ログアウト処理
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login.show');
     }
 
 }

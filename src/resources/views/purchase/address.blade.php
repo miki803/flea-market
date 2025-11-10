@@ -34,7 +34,7 @@
     <div class="form-group">
       <label class="address-label"  for="building">建物名</label>
       <input class="address-input" type="text" id="building" name="building" value="{{ old('building', $user->building) }}" >
-       <p class="error">
+      <p class="error">
         @error('building')
         {{ $message }}
         @enderror

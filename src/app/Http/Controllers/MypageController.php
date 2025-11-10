@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProfileRequest;
 
 class MypageController extends Controller
 {
@@ -11,7 +12,10 @@ class MypageController extends Controller
     {
         $user = Auth::user();
         $tab = request('page', 'sell');
-        $items = [];
+
+        $items = $tab === 'buy'
+            ? $user->purchases->pluck('product')
+            : $user->products;
 
         return view('mypage.main', compact('user', 'items', 'tab'));
     }
@@ -20,7 +24,7 @@ class MypageController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        $isFirstLogin = !$user->postal_code && !$user->address;
+        $isFirstLogin = false;
         return view('mypage.profile', compact('user', 'isFirstLogin'));
     }
 
@@ -28,21 +32,16 @@ class MypageController extends Controller
     public function update(ProfileRequest $request)
     {
         $user = Auth::user();
-        if ($request->hasFile('profile_image')) {
-            if ($user->image_path && Storage::exists('public/' . $user->image_path)) {
-                Storage::delete('public/' . $user->image_path);
-        }
-            $path = $request->file('profile_image')->store('profile', 'public');
-            $user->image_path = $path;
-        }
-        $user->update([
-            'name' => $request->name,
-            'postal_code' => $request->postal_code,
-            'address' => $request->address,
-            'building' => $request->building,
-        ]);
+        $user->update($request->only(['name', 'postal_code', 'address', 'building']));
 
-        return redirect()->route('mypage.edit')->with('success', 'プロフィールを更新しました！');
+        if ($request->hasFile('profile_image')) {
+            $path = $request->file('profile_image')->store('profile_images', 'public');
+            $user->image = $path;
+            $user->save();
+        }
+
+
+        return redirect()->route('mypage.index')->with('success', 'プロフィールを更新しました。');
     }
 
 }

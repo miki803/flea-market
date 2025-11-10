@@ -15,12 +15,6 @@ use App\Http\Controllers\CommentController;
 Route::get('/', [ItemController::class,'index'])->name('items.index');
 // 商品マイリスト
 Route::get('/?tab=mylist', [ItemController::class, 'mylist'])->name('item.mylist');
-//会員登録
-Route::get('/register', [RegisterController::class,'showForm'])->name('register.show');
-Route::post('/register', [RegisterController::class,'store'])->name('register.store');
-//ログイン
-Route::get('/login', [LoginController::class, 'login'])->name('login.show');
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 //商品詳細
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 

@@ -13,7 +13,7 @@
         <div class="header__inner">
             <div class="header__logo">
                 <a href="{{ route('items.index') }}">
-                    <img src="{{ asset('images/logo_coachtech.png') }}" alt="COACHTECH">
+                    <img src="{{ asset('images/coachtechlogo.svg') }}" alt="COACHTECH">
                 </a>
             </div>
 
@@ -23,7 +23,7 @@
 
             <nav class="header__nav">
                 @auth
-                    <a href="{{ route('logout') }}">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ログアウト
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
@@ -33,9 +33,9 @@
                     <a href="{{ route('mypage.index') }}">マイページ</a>
                     <a class="header__sell-btn" href="{{ route('item.create') }}" >出品</a>
                 @else
-                    <a href="{{ route('login.show') }}">ログイン</a>
-                    <a href="{{ route('register.show') }}">会員登録</a>
-                    <a class="header__sell-btn" href="{{ route('login.show') }}" >出品</a>
+                    <a href="{{ route('login') }}">ログイン</a>
+                    <a href="{{ route('register') }}">会員登録</a>
+                    <a class="header__sell-btn" href="{{ route('login') }}" >出品</a>
                 @endauth
             </nav>
         </div>
