@@ -22,14 +22,17 @@
     </div>
 
     {{-- 支払い方法 --}}
-    <div class="payment-section">
-      <h3>支払い方法</h3>
-      <select id="payment-select" name="payment_method" form="purchase-form">
-        <option value="">選択してください</option>
-        <option value="コンビニ払い">コンビニ払い</option>
-        <option value="カード払い">カード払い</option>
-      </select>
-    </div>
+    <form class="purchase-form" action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST">
+      @csrf
+      <div class="payment-section">
+        <h3>支払い方法</h3>
+        <select id="payment-select" name="payment_method" form="purchase-form"onchange="this.form.submit()">
+          <option value="">選択してください</option>
+          <option value="コンビニ払い" {{ request('payment_method') == 'コンビニ払い' ? 'selected' : '' }}>コンビニ払い</option>
+          <option value="カード払い" {{ request('payment_method') == 'カード払い' ? 'selected' : '' }}>カード払い</option>
+        </select>
+      </div>
+    </form>
 
     {{-- 配送先 --}}
     <div class="address-section">
@@ -51,10 +54,11 @@
         </div>
         <div class="summary-row">
           <span>支払い方法</span>
-          <span id="selected-method">未選択</span>
+          <span>{{ request('payment_method') ?? '未選択' }}</span>
         </div>
       </div>
 
+      <input type="hidden" name="payment_method" value="{{ request('payment_method') }}">
       <button type="submit" class="btn-purchase">購入する</button>
     </form>
   </div>

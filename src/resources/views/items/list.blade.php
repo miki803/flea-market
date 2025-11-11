@@ -8,21 +8,16 @@
 <div class="items-container">
 
   {{-- タブ切り替え --}}
-  @auth
-    <div class="tab-menu">
-        <a href="{{ route('items.index') }}" class="{{ request('tab') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
+  <div class="tab-menu">
+      <a href="{{ route('items.index', array_filter(['keyword' => request('keyword')])) }}"class="tab {{ request('tab') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
+      @auth
         <a href="{{ route('items.index', ['tab' => 'mylist']) }}" class="{{ request('tab') === 'mylist' ? 'active' : '' }}">マイリスト</a>
-    </div>
-  @else
-    <div class="tab-menu">
-        <a href="{{ route('items.index') }}" class="active">おすすめ</a>
-        <span class="tab-disabled">マイリスト（ログインが必要）</span>
-    </div>
-  @endauth
+      @endauth
+  </div>
 
   {{-- 商品一覧 --}}
   <div class="item-list">
-    @foreach ($items as $item)
+    @forelse ($items as $item)
       <div class="item-card">
         <a href="{{ route('item.show', ['item_id' => $item->id]) }}">
           <div class="item-image">
@@ -31,11 +26,17 @@
             @else
               <div class="placeholder">商品画像</div>
             @endif
+
+            @if ($item->is_sold ?? false)
+              <div class="sold-label">SOLD</div>
+            @endif
           </div>
           <p class="item-name">{{ $item->name }}</p>
         </a>
       </div>
-    @endforeach
+    @empty
+      <p class="no-items">商品がありません。</p>
+    @endforelse
   </div>
 </div>
 @endsection

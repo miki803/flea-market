@@ -34,7 +34,7 @@
         <div class="category-tags">
             @foreach ($categories as $category)
             <label class="tag">
-                <input class="category-checkbox" type="checkbox" name="categories" value="{{ $category }}" >
+                <input class="category-checkbox" type="checkbox" name="categories[]" value="{{ $category }}" >
                 <span>{{ $category }}</span>
             </label>
             @endforeach

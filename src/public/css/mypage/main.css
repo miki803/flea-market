@@ -7,7 +7,7 @@ body {
     background-color: #fff;
     max-width: 1100px;
     margin: 60px auto;
-    padding: 40px 60px;
+    padding: 50px 80px;
     border-radius: 10px;
 }
 
@@ -15,38 +15,42 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .profile-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .profile-image .placeholder {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background-color: #ddd;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
+    color: #555;
 }
 
 .user-name {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .btn-edit {
     display: inline-block;
-    border: 1px solid #ff6b6b;
+    border: 1.5px solid #ff6b6b;
     color: #ff6b6b;
-    padding: 8px 18px;
+    padding: 10px 22px;
     border-radius: 5px;
     text-decoration: none;
     font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
 .btn-edit:hover {
@@ -56,16 +60,18 @@ body {
 
 .tab-menu {
     display: flex;
-    gap: 20px;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 25px;
+    gap: 25px;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 30px;
+    font-size: 15px;
 }
 
 .tab-menu a {
     text-decoration: none;
     color: #333;
-    font-weight: bold;
-    padding-bottom: 5px;
+    font-weight: 600;
+    padding-bottom: 6px;
+    transition: 0.2s;
 }
 
 .tab-menu a.active {
@@ -76,32 +82,49 @@ body {
 .item-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 30px;
+    justify-content: flex-start;
 }
 
 .item-card {
-    width: 180px;
+    width: 200px;
     text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
 }
 
 .item-image {
     width: 180px;
     height: 180px;
     background-color: #e6e6e6;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
-    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .item-name {
     font-size: 14px;
     color: #333;
+    font-weight: 500;
 }
 
 .no-items {
-    color: #777;
-    margin-top: 40px;
+    color: #999;
+    margin-top: 50px;
     text-align: center;
+    font-size: 15px;
 }

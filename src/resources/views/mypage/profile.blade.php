@@ -12,12 +12,12 @@
         <p class="success">{{ session('success') }}</p>
     @endif
 
-    <form action="{{ route('mypage.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('mypage.update', ['first' => request()->query('first')]) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="profile-image">
             <div class="profile-image__preview">
-                <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('images/default-user.png') }}" alt="プロフィール画像">
+                <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/default-user.png') }}" alt="プロフィール画像">
             </div>
             <label class="btn-upload" for="profile_image">画像を選択する</label>
             <input type="file" id="profile_image" name="profile_image" hidden>
@@ -55,9 +55,9 @@
 
         {{-- 初回か通常かでボタンを切り替え --}}
         @if ($isFirstLogin)
-            <button type="submit" class="btn-save first">はじめる</button>
+            <button class="btn-save first" type="submit" >はじめる</button>
         @else
-            <button type="submit" class="btn-save">更新する</button>
+            <button class="btn-save" type="submit" >更新する</button>
         @endif
     </form>
 </div>

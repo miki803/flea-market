@@ -23,6 +23,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login.show')->with('success', '登録が完了しました。ログインしてください。');
+        return redirect()->route('mypage.edit', ['first' => 1]);
     }
 }

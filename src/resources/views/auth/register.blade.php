@@ -46,7 +46,7 @@
             <label class="register-label" for="password_confirmation">確認用パスワード</label>
             <input class="register-input" type="password" id="password_confirmation" name="password_confirmation">
             <p class="error">
-                @error('password')
+                @error('password_confirmation')
                 {{ $message }}
                 @enderror
             </p>

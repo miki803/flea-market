@@ -50,7 +50,7 @@ class User extends Authenticatable
     }
     // お気に入り
     public function favorites(){
-        return $this->belongsToMany(Product::class, 'favorites');
+        return $this->belongsToMany(Product::class, 'favorites', 'user_id', 'product_id')->withTimestamps();
     }
 
 }

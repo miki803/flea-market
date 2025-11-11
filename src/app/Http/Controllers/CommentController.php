@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -14,9 +13,11 @@ class CommentController extends Controller
       Comment::create([
             'user_id' => Auth::id(),
             'product_id' => $item_id,
-            'content' => $request->content,
+            'content' => $request->input('content'),
         ]);
 
-        return back()->with('success', 'コメントを投稿しました。');
+      return redirect()
+            ->route('item.show', ['item_id' => $item_id])
+            ->with('success', 'コメントを投稿しました。');
   }
 }
