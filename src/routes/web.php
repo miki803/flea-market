@@ -14,7 +14,7 @@ use App\Http\Controllers\FavoriteController;
 //標品一覧（トップ画面）
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 // 商品マイリスト
-Route::get('/?tab=mylist', [ItemController::class, 'mylist'])->name('item.mylist');
+Route::get('/mylist', [ItemController::class, 'mylist'])->name('item.mylist');
 //商品詳細
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 

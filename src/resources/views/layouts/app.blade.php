@@ -13,31 +13,30 @@
         <div class="header__inner">
             <div class="header__logo">
                 <a href="{{ route('items.index') }}">
-                    <img src="{{ asset('images/coachtechlogo.svg') }}" alt="COACHTECH">
+                    <img src="{{ asset('images/coachtechlogo.png') }}" alt="COACHTECH">
                 </a>
             </div>
 
+            @auth
             <form class="header__search" action="{{ route('items.index') }}" method="get" >
-                <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+                <input type="text" name="keyword" placeholder="なにをお探しですか？">
             </form>
+            @endauth
 
-            <nav class="header__nav">
+            <div class="header__nav">
                 @auth
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="header__logout-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ログアウト
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+
+                    <a class="header__mypage-btn" href="{{ route('mypage.index') }}">マイページ</a>
+                    <a class="header__sell-btn" href="{{ route('item.create') }}" >出品</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
                     </form>
-
-                    <a href="{{ route('mypage.index') }}">マイページ</a>
-                    <a class="header__sell-btn" href="{{ route('item.create') }}" >出品</a>
-                @else
-                    <a href="{{ route('login') }}">ログイン</a>
-                    <a href="{{ route('register') }}">会員登録</a>
-                    <a class="header__sell-btn" href="{{ route('login') }}" >出品</a>
                 @endauth
-            </nav>
+            </div>
         </div>
     </header>
 

@@ -1,5 +1,5 @@
 body {
-    background-color: #222;
+    background-color: white;
     font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
 }
 
@@ -7,9 +7,7 @@ body {
     max-width: 480px;
     margin: 80px auto;
     background-color: #fff;
-    padding: 50px 60px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 10px;
 }
 
 .login-title {

@@ -18,6 +18,6 @@ class CommentController extends Controller
 
       return redirect()
             ->route('item.show', ['item_id' => $item_id])
-            ->with('success', 'コメントを投稿しました。');
+            ;
   }
 }

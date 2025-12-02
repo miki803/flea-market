@@ -41,7 +41,7 @@ class ExhibitionRequest extends FormRequest
             'image.required' => '商品画像を選択してください',
             'image.image' => '画像ファイルを選択してください',
             'image.mimes' => '画像はJPEGまたはPNG形式でアップロードしてください',
-            'category.required' => '商品のカテゴリーを選択してください',
+            'categories.required' => '商品のカテゴリーを選択してください',
             'condition.required' => '商品の状態を選択してください',
             'price.required' => '価格を入力してください',
             'price.integer' => '価格は数値で入力してください',

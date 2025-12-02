@@ -18,22 +18,30 @@ class PurchaseController extends Controller
     }
 
     // 購入処理
-    public function store(Request $request, $item_id)
+    public function store(PurchaseRequest $request, $item_id)
     {
         $item = Product::findOrFail($item_id);
+
+        if ($item->is_sold) {
+            return redirect()
+                ->route('items.index')
+                ->with('error', 'この商品はすでに購入されています。');
+        }
+        $user = Auth::user();
+        return view('purchase.buy', compact('item', 'user'));
 
         Purchase::create([
             'user_id' => Auth::id(),
             'product_id' => $item->id,
             'payment_method' => $request->payment_method,
-            'postal_code' => Auth::user()->postal_code,
-            'address' => Auth::user()->address,
-            'building' => Auth::user()->building,
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building,
         ]);
-        return redirect()->route('mypage.index')->with('success', '購入が完了しました！');
+        $item->update([
+            'is_sold' => true,
+        ]);
+
+        return redirect()->route('mypage.index');
     }
-
-
-
-
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Favorite;
+use App\Models\FavoriteRequest;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
@@ -16,7 +16,7 @@ class FavoriteController extends Controller
             'product_id' => $product_id,
         ]);
 
-        return back()->with('success', 'お気に入りに追加しました');
+        return back();
     }
 
     //お気に入り解除
@@ -26,6 +26,6 @@ class FavoriteController extends Controller
                 ->where('product_id', $product_id)
                 ->delete();
 
-        return back()->with('success', 'お気に入りを解除しました');
+        return back();
     }
 }

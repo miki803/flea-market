@@ -14,21 +14,21 @@
 
         <div class="form-group">
             <label class="login-label" for="email">メールアドレス</label>
-            <input class="login-input" type="email" name="email" id="email" value="{{ old('email') }}" required autofocus>
+            <input class="login-input" type="email" name="email" id="email" value="{{ old('email') }}" autofocus>
 
             <p class="error">
                 @error('email')
-                {{ $message }}
+                    {{ $message }}
                 @enderror
             </p>
         </div>
 
         <div class="form-group">
             <label class="login-label" for="password">パスワード</label>
-            <input class="login-input" type="password" name="password" id="password" required>
+            <input class="login-input" type="password" name="password" id="password" >
             <p class="error">
                 @error('password')
-                {{ $message }}
+                    {{ $message }}
                 @enderror
             </p>
         </div>

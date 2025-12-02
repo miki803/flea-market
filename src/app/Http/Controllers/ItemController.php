@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,13 +49,9 @@ class ItemController extends Controller
     public function create()
     {
         $categories = [
-        'ファッション',
-        '家電',
-        '雑貨',
-        '食品',
-        ];
-        $conditions = ['新品', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'];
+        'ファッション','家電','インテリア','レディース','メンズ','コスメ','本','ゲーム','スポーツ','キッチン','ハンドメイド','アクセサリー','おもちゃ','ベビー・キッズ',];
 
+        $conditions = ['新品', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'];
 
         return view('items.sell', compact('categories', 'conditions'));
     }
@@ -80,15 +77,16 @@ class ItemController extends Controller
 
         //登録処理
         Product::create([
-            'user_id' => Auth::id(),
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'price' => $validated['price'],
-            'condition' => $validated['condition'],
-            'category' => $categoryNames,
-            'image' => $path,
-        ]);
-        return redirect()->route('items.index')->with('success', '商品を出品しました！');
+        'user_id'   => Auth::id(),
+        'name'      => $validated['name'],
+        'brand'     => $validated['brand'] ?? null,
+        'description' => $validated['description'],
+        'price'     => $validated['price'],
+        'condition' => $validated['condition'],
+        'category'  => implode(',', $validated['categories']),
+        'image'     => $path,
+    ]);
+        return redirect()->route('items.index');
     }
 
 }

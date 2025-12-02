@@ -30,10 +30,10 @@
 
     {{-- カテゴリー --}}
     <div class="category-group">
-        <p class="form-label">カテゴリー</p>
-        <div class="category-tags">
+        <label class="form-label">カテゴリー</label>
+        <div class="category-list">
             @foreach ($categories as $category)
-            <label class="tag">
+            <label class="list">
                 <input class="category-checkbox" type="checkbox" name="categories[]" value="{{ $category }}" >
                 <span>{{ $category }}</span>
             </label>
@@ -79,7 +79,7 @@
 
         <div class="form-group">
             <label class="form-label" for="brand" >ブランド名</label>
-            <input type="text" name="brand" id="brand" placeholder="ブランド名を入力してください" value="{{ old('brand') }}">
+            <input type="text" name="brand" id="brand" value="{{ old('brand') }}">
             <p class="error">
                 @error('brand')
                 {{ $message }}
@@ -89,7 +89,7 @@
 
         <div class="form-group">
             <label class="form-label" for="description" >商品の説明</label>
-            <textarea name="description" id="description" rows="4" placeholder="商品の説明を入力してください">{{ old('description') }}</textarea>
+            <textarea name="description" id="description" >{{ old('description') }}</textarea>
             <p class="error">
                 @error('description')
                 {{ $message }}
