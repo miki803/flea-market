@@ -5,11 +5,10 @@ body {
 
 .verify-container {
     max-width: 500px;
-    margin: 80px auto;
+    margin: 0 auto;
     background-color: #fff;
     padding: 60px;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 

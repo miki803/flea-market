@@ -9,7 +9,7 @@
 
 <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST" id="purchase-form">
 @csrf
-
+<div class="purchase-container">
   {{-- 左側 --}}
   <div class="purchase-left">
 
@@ -78,7 +78,7 @@
   @endif
 
   </div>
-
+</div>
 </form>
 </div>
 

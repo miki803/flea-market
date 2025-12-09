@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
 use App\Models\User;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -28,20 +29,24 @@ class FortifyServiceProvider extends ServiceProvider
         });
         //新規ユーザー登録
         Fortify::createUsersUsing(CreateNewUser::class);
-        //ログイン後の遷移先（商品一覧）
+        //ログイン後の遷移先
         Fortify::redirects('login', function (){
             return route('items.index');
         });
-        //  新規登録後の遷移
+        // 新規登録後の遷移
         Fortify::redirects('register', '/mypage/profile');
 
         // ログイン認証
         Fortify::authenticateUsing(function (Request $request)
         {
+            $request->validated();
             $user = User::where('email', $request->email)->first();
 
-            if ($user && Hash::check($request->password, $user->password)
-            ){
+            if ($user && Hash::check($request->password, $user->password)) {
+
+                if ($user->email_verified_at === null) {
+                    return null;
+                }
                 return $user;
             }
             return null;

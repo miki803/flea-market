@@ -15,7 +15,7 @@ class MypageController extends Controller
         $tab = request('page', 'sell');
 
         $items = $tab === 'buy'
-            ? $user->purchases->pluck('product')
+            ? $user->purchases->map(fn($p) => $p->product)
             : $user->products;
 
         return view('mypage.main', compact('user', 'items', 'tab'));

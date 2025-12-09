@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +15,10 @@ class ItemController extends Controller
         $keyword = $request->get('keyword');
 
         if ($tab === 'mylist' && Auth::check()) {
-            $query = Auth::user()
+            $favoriteProductIds = Auth::user()
                 ->favorites()
-                ->with('user');
+                ->pluck('product_id');
+            $query = Product::whereIn('id', $favoriteProductIds);
         } else {
             $query = Product::query();
         }
@@ -30,10 +30,11 @@ class ItemController extends Controller
 
         // 自分が出品した商品を除外
         if (Auth::check()) {
-            $query->where('products.user_id', '!=', Auth::id());
+            $query->where('user_id', '!=', Auth::id());
         }
 
-        $items = $query->orderBy('products.created_at', 'desc')->get();
+        $query->orderBy('created_at', 'desc');
+        $items = $query->get();
 
         return view('items.list', compact('items', 'keyword', 'tab'));
     }
