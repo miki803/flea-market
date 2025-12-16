@@ -1,34 +1,43 @@
 body {
-    background-color: #222;
+    background-color: white;
+    font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+}
+.sell-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
     font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
 }
 
-.sell-container {
-    background-color: #fff;
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 50px 80px;
-    border-radius: 10px;
-}
-
-.page-title {
+.sell-container .page-title {
     text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
-.form-group {
+.sell-container .form-group {
     margin-bottom: 25px;
 }
 
-.form-label {
+.sell-container .form-label {
     display: block;
     font-weight: bold;
     margin-bottom: 6px;
 }
 
-.upload-btn {
+.sell-container input[type="text"],
+.sell-container input[type="number"],
+.sell-container textarea,
+.sell-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.sell-container .upload-btn {
     display: inline-block;
     background-color: #ff6b6b;
     color: white;
@@ -37,42 +46,59 @@ body {
     cursor: pointer;
 }
 
-input[type="text"],
-input[type="number"],
-textarea,
-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.sell-container .upload-btn:hover {
+    background-color: #e85757;
 }
 
-.category-tags {
+.sell-container hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.sell-container .section-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.sell-container .category-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-top: 10px;
 }
 
-.tag {
+.sell-container .list {
+    cursor: pointer;
+}
+
+.sell-container .list input {
+    display: none;
+}
+
+.sell-container .list span {
     border: 1px solid #ff6b6b;
     color: #ff6b6b;
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 13px;
-    cursor: pointer;
-    user-select: none;
+    display: inline-block;
+    transition: 0.2s;
 }
 
-.tag.selected {
+.sell-container .list input:checked+span {
     background-color: #ff6b6b;
     color: #fff;
 }
 
-input[type="checkbox"] {
-    display: none;
+.sell-container .error {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
 }
 
-.btn-submit {
+.sell-container .btn-submit {
     display: block;
     width: 100%;
     background-color: #ff6b6b;
@@ -84,12 +110,6 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-.btn-submit:hover {
+.sell-container .btn-submit:hover {
     background-color: #e85757;
-}
-
-.error {
-    color: red;
-    font-size: 13px;
-    margin-top: 3px;
 }

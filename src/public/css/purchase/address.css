@@ -1,5 +1,5 @@
 body {
-    background-color: #222;
+    background-color: white;
     font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
 }
 
@@ -9,7 +9,6 @@ body {
     margin: 80px auto;
     padding: 60px 80px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .address-title {

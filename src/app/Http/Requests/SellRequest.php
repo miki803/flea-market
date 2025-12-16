@@ -4,34 +4,25 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ExhibitionRequest extends FormRequest
+class SellRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            "name" => ['required'],
-            "description" => ['required','max:255'],
-            "image" => ['required', 'image', 'mimes:jpeg,png'],
-            "categories" => ['required'],
-            "condition" => ['required'],
-            "price" => ['required', 'integer', 'min:0'],
+            'name'        => ['required'],
+            'description' => ['required', 'max:255'],
+            'image'       => ['required', 'image', 'mimes:jpeg,png'],
+            'categories'  => ['required', 'array'],
+            'condition'   => ['required'],
+            'price'       => ['required', 'integer', 'min:0'],
         ];
     }
+
     public function messages()
     {
         return [
@@ -41,7 +32,7 @@ class ExhibitionRequest extends FormRequest
             'image.required' => '商品画像を選択してください',
             'image.image' => '画像ファイルを選択してください',
             'image.mimes' => '画像はJPEGまたはPNG形式でアップロードしてください',
-            'category.required' => '商品のカテゴリーを選択してください',
+            'categories.required' => '商品のカテゴリーを選択してください',
             'condition.required' => '商品の状態を選択してください',
             'price.required' => '価格を入力してください',
             'price.integer' => '価格は数値で入力してください',

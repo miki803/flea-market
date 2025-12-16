@@ -11,7 +11,11 @@
     <div class="profile-header">
         <div class="profile-left">
             <div class="profile-image">
+                @if($user->image)
+                    <img src="{{ asset('storage/' . $user->image) }}" alt="プロフィール画像">
+                @else
                 <div class="placeholder">画像</div>
+                @endif
             </div>
             <h2 class="user-name">{{ $user->name }}</h2>
         </div>

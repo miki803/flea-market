@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SellRequest;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -12,17 +13,37 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->get('tab');
+        $keyword = $request->get('keyword');
+
         if ($tab === 'mylist' && Auth::check()) {
-            $items = Auth::user()->favorites;
+            $favoriteProductIds = Auth::user()
+                ->favorites()
+                ->pluck('product_id');
+            $query = Product::whereIn('id', $favoriteProductIds);
         } else {
-            $items = Product::latest()->get();
+            $query = Product::query();
         }
+
+        // 検索（商品名で部分一致）
+        if (!empty($keyword)){
+            $query->where('name', 'like', "%{$keyword}%");
+        }
+
+        // 自分が出品した商品を除外
+        if (Auth::check()) {
+            $query->where('user_id', '!=', Auth::id());
+        }
+
+        $query->orderBy('created_at', 'desc');
+        $items = $query->get();
+
+        return view('items.list', compact('items', 'keyword', 'tab'));
     }
 
     // 商品詳細
     public function show($item_id)
     {
-        $item = Product::with(['comments.user'])->findOrFail($item_id);
+        $item = Product::findOrFail($item_id);
         return view('items.detail', compact('item'));
     }
 
@@ -30,45 +51,37 @@ class ItemController extends Controller
     public function create()
     {
         $categories = [
-        'ファッション',
-        '家電',
-        '雑貨',
-        '食品',
-        ];
-        $conditions = ['新品', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'];
+        'ファッション','家電','インテリア','レディース','メンズ','コスメ','本','ゲーム','スポーツ','キッチン','ハンドメイド','アクセサリー','おもちゃ','ベビー・キッズ',];
 
+        $conditions = ['新品', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'];
 
         return view('items.sell', compact('categories', 'conditions'));
     }
 
     // 出品登録
-    public function store(Request $request)
+    public function store(SellRequest $request)
     {
-        $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'brand' => ['nullable', 'string', 'max:255'],
-        'description' => ['required', 'string'],
-        'price' => ['required', 'numeric', 'min:0'],
-        'condition' => ['required', 'string'],
-        'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-        'categories' => ['required'],
-    ]);
+        $validated = $request->validated();
 
+    //画像保存
         $path = null;
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $path = $request->file('image')->store('products', 'public');
         }
 
+        //登録処理
         Product::create([
-            'user_id' => Auth::id(),
-            'name' => $validated['name'],
+            'user_id'     => Auth::id(),
+            'name'        => $validated['name'],
+            'brand'       => $request->brand,
             'description' => $validated['description'],
-            'price' => $validated['price'],
-            'condition' => $validated['condition'],
-            'category' => $request->input('category', 'その他'),
-            'image' => $path,
+            'price'       => $validated['price'],
+            'condition'   => $validated['condition'],
+            'category'    => implode(',', $validated['categories']),
+            'image'       => $path,
         ]);
-        return redirect()->route('items.index')->with('success', '商品を出品しました！');
+
+        return redirect()->route('items.index');
     }
 
 }
