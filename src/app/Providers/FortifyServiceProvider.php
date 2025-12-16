@@ -39,14 +39,10 @@ class FortifyServiceProvider extends ServiceProvider
         // ログイン認証
         Fortify::authenticateUsing(function (Request $request)
         {
-            $request->validated();
             $user = User::where('email', $request->email)->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
 
-                if ($user->email_verified_at === null) {
-                    return null;
-                }
                 return $user;
             }
             return null;

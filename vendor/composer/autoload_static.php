@@ -44,6 +44,7 @@ class ComposerStaticInit0c56a11acfaa03e580f1b2413e6be119
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Clock\\' => 24,
+            'Stripe\\' => 7,
         ),
         'P' => 
         array (
@@ -134,6 +135,10 @@ class ComposerStaticInit0c56a11acfaa03e580f1b2413e6be119
         'Symfony\\Component\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/clock',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'Psr\\SimpleCache\\' => 
         array (

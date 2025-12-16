@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a30831283f83cead06c16161120230ede5fb72b9',
+        'reference' => '0bd18cc17dcfd64486bd475a7a1658834e4011b7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a30831283f83cead06c16161120230ede5fb72b9',
+            'reference' => '0bd18cc17dcfd64486bd475a7a1658834e4011b7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -180,6 +180,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'stripe/stripe-php' => array(
+            'pretty_version' => 'v19.0.0',
+            'version' => '19.0.0.0',
+            'reference' => '8f868a7825d2680e917f89839e4b67851dad96e2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stripe/stripe-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/clock' => array(
             'pretty_version' => 'v7.3.0',

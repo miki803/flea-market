@@ -6,6 +6,8 @@ use App\Http\Requests\PurchaseRequest;
 use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as CheckoutSession;
 
 class PurchaseController extends Controller
 {
@@ -14,6 +16,7 @@ class PurchaseController extends Controller
     {
         $item = Product::findOrFail($item_id);
         $user = Auth::user();
+
         return view('purchase.buy', compact('item', 'user'));
     }
 
@@ -25,23 +28,35 @@ class PurchaseController extends Controller
         if ($item->is_sold) {
             return redirect()
                 ->route('items.index')
-                ->with('error', 'この商品はすでに購入されています。');
+                ->with('error');
         }
-        $user = Auth::user();
-        return view('purchase.buy', compact('item', 'user'));
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-        Purchase::create([
-            'user_id' => Auth::id(),
-            'product_id' => $item->id,
-            'payment_method' => $request->payment_method,
-            'postal_code' => $request->postal_code,
-            'address' => $request->address,
-            'building' => $request->building,
-        ]);
-        $item->update([
-            'is_sold' => true,
-        ]);
+        if ($request->payment_method === 'コンビニ払い') {
+            $paymentMethods = ['konbini'];
+        } else {
+            $paymentMethods = ['card'];
+        }
 
-        return redirect()->route('mypage.index');
+        $session = CheckoutSession::create([
+            'payment_method_types' => $paymentMethods,
+            'mode' => 'payment',
+
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' => $item->price,
+                ],
+                'quantity' => 1,
+            ]],
+
+            'success_url' => route('items.index'),
+            'cancel_url' => route('purchase.show', ['item_id' => $item->id]),
+        ]);
+        return redirect($session->url);
     }
 }
+
