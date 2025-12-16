@@ -57,9 +57,11 @@ php artisan db:seed
 ```
 
 ## 使用技術(実行環境)
-- PHP8.3.0
-- Laravel8.83.27
-- MySQL8.0.26
+- PHP：8.1.33
+- Laravel：8.83.8
+- MySQL：8.0.26
+- Webサーバー：Nginx
+- 環境構築：Docker / Docker Compose
 
 ## ER図
 
