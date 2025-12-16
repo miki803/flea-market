@@ -72,8 +72,17 @@
 
         @foreach ($item->comments as $comment)
             <div class="comment">
-                <strong>{{ $comment->user->name }}</strong>
-                <p>{{ $comment->content }}</p>
+              <div class="comment-user">
+                @if($comment->user->image)
+                  <img class="comment-user-image" src="{{ asset('storage/' . $comment->user->image) }}"alt="{{ $comment->user->name }}">
+                @else
+                  <div class="comment-user-placeholder">画像</div>
+                @endif
+                <strong class="comment-user-name">
+                  {{ $comment->user->name }}
+                </strong>
+              </div>
+              <p class="comment-content">{{ $comment->content }}</p>
             </div>
         @endforeach
 

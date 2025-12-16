@@ -11,41 +11,36 @@
 <body>
     <header class="header">
         <div class="header__inner">
+
             <div class="header__logo">
                 <a href="{{ route('items.index') }}">
-                    <img src="{{ asset('storage/products/coachtechlogo.png') }}" alt="COACHTECH">
+                    <img src="{{ asset('storage/products/coachtechlogo.png') }}">
                 </a>
             </div>
 
-            @if (!request()->routeIs('login', 'register'))
+            <form class="header__search" action="{{ route('items.index') }}" method="get">
+                <input type="text" name="keyword" placeholder="なにをお探しですか？">
+            </form>
 
+            <div class="header__nav">
                 @auth
-                <form class="header__search" action="{{ route('items.index') }}" method="get" >
-                    <input type="text" name="keyword" placeholder="なにをお探しですか？">
-                </form>
+                    <a class="header__logout-btn"href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    ログアウト
+                    </a>
+                    <a class="header__mypage-btn" href="{{ route('mypage.index') }}">マイページ</a>
+                    <a class="header__sell-btn" href="{{ route('item.create') }}">出品</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
                 @endauth
+                @guest
+                    <a class="header__login-btn" href="{{ route('login') }}">ログイン</a>
+                    <a class="header__mypage-btn" href="{{ route('mypage.index') }}">マイページ</a>
+                    <a class="header__sell-btn" href="{{ route('item.create') }}">出品</a>
+                @endguest
+            </div>
 
-                <div class="header__nav">
-                    @auth
-                        <a class="header__logout-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        ログアウト
-                        </a>
-
-                        <a class="header__mypage-btn" href="{{ route('mypage.index') }}">マイページ</a>
-                        <a class="header__sell-btn" href="{{ route('item.create') }}" >出品</a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                        </form>
-                    @endauth
-
-                    @guest
-                        <a class="header__login-btn" href="{{ route('login') }}">ログイン</a>
-                        <a class="header__mypage-btn" href="{{ route('mypage.index') }}">マイページ</a>
-                        <a class="header__sell-btn" href="{{ route('item.create') }}" >出品</a>
-                    @endguest
-                </div>
-            @endif
         </div>
     </header>
 

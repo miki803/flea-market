@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SellRequest;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -58,35 +59,28 @@ class ItemController extends Controller
     }
 
     // 出品登録
-    public function store(Request $request)
+    public function store(SellRequest $request)
     {
-        $validated = $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'brand' => ['nullable', 'string', 'max:255'],
-        'description' => ['required', 'string'],
-        'price' => ['required', 'numeric', 'min:0'],
-        'condition' => ['required', 'string'],
-        'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-        'categories' => ['required', 'array'],
-    ]);
+        $validated = $request->validated();
 
     //画像保存
         $path = null;
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $path = $request->file('image')->store('products', 'public');
         }
 
         //登録処理
         Product::create([
-        'user_id'   => Auth::id(),
-        'name'      => $validated['name'],
-        'brand'     => $validated['brand'] ?? null,
-        'description' => $validated['description'],
-        'price'     => $validated['price'],
-        'condition' => $validated['condition'],
-        'category'  => implode(',', $validated['categories']),
-        'image'     => $path,
-    ]);
+            'user_id'     => Auth::id(),
+            'name'        => $validated['name'],
+            'brand'       => $request->brand,
+            'description' => $validated['description'],
+            'price'       => $validated['price'],
+            'condition'   => $validated['condition'],
+            'category'    => implode(',', $validated['categories']),
+            'image'       => $path,
+        ]);
+
         return redirect()->route('items.index');
     }
 

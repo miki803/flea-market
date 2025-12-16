@@ -18,7 +18,8 @@ Route::get('/mylist', [ItemController::class, 'mylist'])->name('item.mylist');
 //商品詳細
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
+
 //商品購入
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'showForm'])->name('purchase.show');
     Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
@@ -37,4 +38,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/favorite/{product_id}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
 // コメント投稿
     Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/purchase/success/{item_id}',[PurchaseController::class, 'success'])->name('purchase.success');
 });

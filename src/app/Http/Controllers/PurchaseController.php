@@ -53,10 +53,38 @@ class PurchaseController extends Controller
                 'quantity' => 1,
             ]],
 
-            'success_url' => route('items.index'),
-            'cancel_url' => route('purchase.show', ['item_id' => $item->id]),
+            'success_url' => route('purchase.success', [
+                'item_id' => $item->id,
+            ]),
+            'cancel_url' => route('purchase.show', [
+                'item_id' => $item->id,
+            ]),
         ]);
+
         return redirect($session->url);
+    }
+
+    public function success($item_id)
+    {
+        $item = Product::findOrFail($item_id);
+
+    // 二重購入防止
+        if ($item->is_sold) {
+            return redirect()->route('items.index');
+        }
+
+        Purchase::create([
+            'user_id'        => Auth::id(),
+            'product_id'     => $item->id,
+            'payment_method' => 'stripe',
+            'postal_code'    => Auth::user()->postal_code,
+            'address'        => Auth::user()->address,
+            'building'       => Auth::user()->building,
+        ]);
+
+        return redirect()
+            ->route('items.index')
+            ->with('success', '購入が完了しました');
     }
 }
 

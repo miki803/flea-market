@@ -9,7 +9,6 @@
 
 <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST" id="purchase-form">
 @csrf
-<div class="purchase-container">
   {{-- 左側 --}}
   <div class="purchase-left">
 
@@ -38,7 +37,10 @@
 
     {{-- 配送先 --}}
     <div class="address-section">
-      <h3>配送先</h3>
+      <h3>配送先
+        <a href="{{ route('address.show', ['item_id' => $item->id]) }}" class="link-change">変更する</a>
+      </h3>
+
       <p>
         〒{{ $user->postal_code ?? 'XXX-YYYY' }}<br>
         {{ $user->address ?? 'ここには住所と建物が入ります' }}
@@ -48,7 +50,7 @@
       <input type="hidden" name="address" value="{{ $user->address }}">
       <input type="hidden" name="building" value="{{ $user->building }}">
 
-      <a href="{{ route('address.show', ['item_id' => $item->id]) }}" class="link-change">変更する</a>
+      
     </div>
 
   </div>
@@ -78,9 +80,9 @@
   @endif
 
   </div>
-</div>
 </form>
 </div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

@@ -9,7 +9,7 @@
 
     <h2 class="register-title">会員登録</h2>
 
-    <form class="register-form" action="{{ url('/register') }}" method="POST">
+    <form class="register-form" action="{{ route('register') }}" method="POST">
         @csrf
 
         <div class="register-group">
@@ -46,7 +46,7 @@
             <label class="register-label" for="password_confirmation">確認用パスワード</label>
             <input class="register-input" type="password" id="password_confirmation" name="password_confirmation">
             <p class="error">
-                @error('password')
+                @error('password_confirmation')
                 {{ $message }}
                 @enderror
             </p>

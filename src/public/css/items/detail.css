@@ -149,6 +149,47 @@ body {
     resize: none;
 }
 
+.comment {
+    margin-bottom: 16px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.comment-user-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-user-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ccc;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.comment-user-name {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.comment-content {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
 .btn-comment {
     background-color: #ff6b6b;
     border: none;
