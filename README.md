@@ -72,6 +72,8 @@ php artisan db:seed
 
 本アプリでは、各機能について
 **手動による結合テスト・バリデーションテスト** を実施しています。
+- テスト実行を想定し、`.env.testing` によるテスト用環境を分離しています
+
 ログインメール:admin@example.com
 パスワード:password
 
